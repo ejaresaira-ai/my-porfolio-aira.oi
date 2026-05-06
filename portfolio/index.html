@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Airale — Graphic Designer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    /* ---CSS--- */
+
+    :root {
+      --navy:  #0A192F;
+      --soft:  #112240;
+      --teal:  #64FFDA;
+      --white: #FFFFFF;
+      --muted: #9FB3C8;
+      --font:  'Poppins', sans-serif;
+    }
+
+    /*--- RESET & BASE --- */
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      color: var(--white);
+      background: var(--navy);
+    }
+
+    a { text-decoration: none; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+
+    /* --- BUTTONS ---*/
+
+    .btn {
+      display: inline-block;
+      padding: 10px 24px;
+      border-radius: 6px;
+      font-family: var(--font);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(100, 255, 218, 0.2);
+    }
+
+    .btn.small {
+      padding: 7px 18px;
+      font-size: 0.82rem;
+    }
+
+    .btn-outline {
+      border-color: var(--teal);
+      color: var(--teal);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background: var(--teal);
+      color: var(--navy);
+    }
+
+    .btn-filled {
+      background: var(--navy);
+      color: var(--teal);
+      border-color: var(--teal);
+    }
+
+    .btn-filled:hover {
+      background: var(--teal);
+      color: var(--navy);
+    }
+
+    /* ========== SECTION TITLE ========== */
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 48px;
+    }
+
+    .section-title span { color: var(--teal); }
+
+    /* --- NAVBAR --- */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 60px;
+      background: var(--navy);
+      box-shadow: 0 2px 12px rgba(10, 35, 66, 0.3);
+    }
+
+    .nav-logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--white);
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--teal);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover { color: var(--teal); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: var(--teal);
+      border-radius: 3px;
+      transition: 0.3s;
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      padding: 100px 60px;
+      min-height: 100vh;
+    }
+
+    .hero-text { max-width: 560px; }
+
+    .hero-text h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .hero-text h1 .highlight { color: var(--teal); }
+
+    #typed-text { color: var(--white); }
+
+    .cursor {
+      display: inline-block;
+      color: var(--teal);
+      margin-left: 2px;
+      animation: blink 0.75s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    .hero-text p {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-image img {
+      width: 300px;
+      height: 380px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid var(--teal);
+      box-shadow: 0 8px 40px rgba(100, 255, 218, 0.25);
+    }
+
+    /* --- ABOUT SECTION --- */
+    .about {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      padding: 80px 60px;
+    }
+
+    .about-image img {
+      width: 240px;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid var(--teal);
+      box-shadow: 0 6px 24px rgba(100, 255, 218, 0.2);
+      flex-shrink: 0;
+    }
+
+    .about-text h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .about-text h2 span { color: var(--teal); }
+
+    .about-text h4 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--teal);
+      margin-bottom: 16px;
+      letter-spacing: 0.03em;
+    }
+
+    .about-text p {
+      font-size: 0.92rem;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.85;
+      max-width: 550px;
+    }
+
+    .skills-block { margin-top: 28px; }
+
+    .skills-block h5 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .skills-block h5 i { color: var(--teal); }
+
+    .skills-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--white);
+      border: 1.5px solid rgba(100, 255, 218, 0.4);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    .skill-tag i {
+      font-size: 0.95rem;
+      color: var(--teal);
+    }
+
+    .skill-tag:hover {
+      background: var(--soft);
+      border-color: var(--teal);
+    }
+
+    /* ---MY JOURNEY (Education & Experience) ---*/
+
+    .timeline-section { padding: 80px 60px; }
+
+    .journey-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .journey-col-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 28px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid rgba(100, 255, 218, 0.3);
+    }
+
+    .journey-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .journey-dot {
+      width: 13px;
+      height: 13px;
+      min-width: 13px;
+      background: var(--teal);
+      border-radius: 50%;
+      margin-top: 5px;
+      box-shadow: 0 0 0 4px rgba(100, 255, 218, 0.2);
+    }
+
+    .journey-card {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(100, 255, 218, 0.15);
+      border-radius: 10px;
+      padding: 16px 18px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .journey-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-3px);
+    }
+
+    .journey-year {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--teal);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .journey-card h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .journey-card p {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /*--- SERVICES SECTION --- */
+
+    .services { 
+      padding: 80px 60px; 
+    }
+
+    .services-grid {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .service-card {
+      background: var(--soft);
+      border-radius: 20px;
+      padding: 40px 28px;
+      width: 230px;
+      text-align: center;
+      border: 1px solid rgba(100, 255, 218, 0.15);
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+
+    .service-card.raise { 
+      margin-bottom: 50px; 
+    }
+    .service-card.lower { 
+      margin-bottom: 0;
+     }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(100, 255, 218, 0.2);
+      border-color: var(--teal);
+    }
+
+    .service-icon {
+      font-size: 2.2rem;
+      color: var(--teal);
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .service-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    /*--- PROJECTS SECTION --- */
+    .project { padding: 80px 60px; }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .project-card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      cursor: pointer;
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 25, 47, 0.92);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .project-card:hover img {
+      transform: scale(1.07);
+      filter: brightness(0.35);
+    }
+
+    .project-card:hover .project-overlay { opacity: 1; }
+
+    .project-overlay h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .project-overlay p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    /* --- ACHIEVEMENTS SECTION --- */
+    .achievements { padding: 80px 60px; }
+
+    .ach-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .ach-tab {
+      padding: 10px 28px;
+      border-radius: 50px;
+      border: 2px solid rgba(100, 255, 218, 0.3);
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--font);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .ach-tab:hover {
+      border-color: var(--teal);
+      color: var(--white);
+    }
+
+    .ach-tab.active {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: var(--navy);
+    }
+
+    .ach-content {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .ach-content.active { display: flex; }
+
+    .ach-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .ach-dot {
+      width: 13px;
+      height: 13px;
+      min-width: 13px;
+      background: var(--teal);
+      border-radius: 50%;
+      margin-top: 6px;
+      box-shadow: 0 0 0 4px rgba(100, 255, 218, 0.2);
+    }
+
+    .ach-card {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(100, 255, 218, 0.15);
+      border-radius: 12px;
+      padding: 18px 20px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .ach-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-3px);
+    }
+
+    .ach-year {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--teal);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .ach-card h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .ach-org {
+      font-size: 0.82rem;
+      color: var(--teal);
+      font-weight: 500;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ach-card > p {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+
+    .ach-badge {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(100, 255, 218, 0.1);
+      border: 1px solid rgba(100, 255, 218, 0.3);
+      color: var(--teal);
+    }
+
+    /* --- CONTACT SECTION --- */
+
+    .contact {
+      display: flex;
+      gap: 60px;
+      padding: 80px 60px;
+      flex-wrap: wrap;
+    }
+
+    .contact-left {
+      flex: 1;
+      min-width: 240px;
+    }
+
+    .contact-right {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .contact-left h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .contact-left h2 span { color: var(--teal); }
+
+    .contact-left .subtitle {
+      color: var(--teal);
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+
+    .contact-left h4,
+    .contact-right h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .contact-left h4 i,
+    .contact-right h4 i { color: var(--teal); }
+
+    .contact-info p {
+      margin-bottom: 14px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .contact-info strong {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
+    }
+
+    .contact-info a {
+      color: var(--teal);
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    .contact-info a:hover { opacity: 0.75; }
+
+    .form-group { margin-bottom: 16px; }
+
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid rgba(100, 255, 218, 0.3);
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: 0.9rem;
+      color: var(--white);
+      background: var(--soft);
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus { 
+      border-color: var(--teal); 
+    }
+
+    .form-group textarea {
+       resize: vertical;
+       }
+
+    /* --- FOOTER --- */
+    .footer {
+      background: var(--soft);
+      text-align: center;
+      padding: 48px 60px;
+      border-top: 1px solid rgba(100, 255, 218, 0.1);
+    }
+
+    .footer h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--teal);
+      margin-bottom: 4px;
+    }
+
+    .footer > p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 0.88rem;
+      color: var(--muted);
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+       color: var(--teal);
+       }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .social-icons a {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 0.95rem;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+    }
+
+    .social-icons a:hover {
+      background: var(--teal);
+      color: var(--navy);
+      border-color: var(--teal);
+    }
+
+    .copy {
+      font-size: 0.78rem;
+      color: #4E7490;
+    }
+
+    /* --- SCROLL REVEAL ANIMATIONS --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal-scale.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Staggered delays for service cards */
+
+    .services-grid .service-card:nth-child(1) { 
+      transition-delay: 0.00s;
+     }
+    .services-grid .service-card:nth-child(2) { 
+      transition-delay: 0.15s; 
+    }
+    .services-grid .service-card:nth-child(3) {
+       transition-delay: 0.30s;
+       }
+
+    /* Staggered delays for project cards */
+
+    .project-grid .project-card:nth-child(1) {
+       transition-delay: 0.00s; 
+      }
+
+    .project-grid .project-card:nth-child(2) { 
+      transition-delay: 0.10s; 
+    }
+
+    .project-grid .project-card:nth-child(3) { 
+      transition-delay: 0.20s; 
+    }
+
+    .project-grid .project-card:nth-child(4) {
+       transition-delay: 0.30s; 
+      }
+
+    .project-grid .project-card:nth-child(5) {
+       transition-delay: 0.40s; 
+      }
+
+    .project-grid .project-card:nth-child(6) {
+       transition-delay: 0.50s;
+       }
+
+    
+
+    
+    /* --- RESPONSIVE --- */
+
+    @media (max-width: 600px) {
+      .hamburger {
+         display: flex;
+        
+        }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 62px;
+        left: 0;
+        right: 0;
+        background:transparent;
+        padding: 20px 30px;
+        gap: 18px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        z-index: 998;
+      }
+
+      .nav-links.open {
+         display: flex; 
+        
+      }
+
+      .hero-text h1  {
+         font-size: 1.8rem; 
+        
+        }
+      .section-title {
+         font-size: 1.6rem; 
+        }
+
+      .services-grid { 
+        flex-direction: column; align-items: center; 
+      
+      }
+
+      .service-card {
+         width: 100%; max-width: 320px; 
+        
+        }
+      .service-card.raise,
+      .service-card.lower {
+         margin-bottom: 0;
+        
+        }
+
+      .project-grid {
+         grid-template-columns: 1fr;
+        
+        }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!--- NAVBAR --->
+
+  <nav class="navbar">
+    <div class="nav-logo">Airale</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#project">Projects</a></li>
+      <li><a href="#achievements">Achievements</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!---- HERO SECTION --->
+
+  <section class="hero" id="home">
+    <div class="hero-text reveal-left">
+      <h1>
+        Hi, I'm <span class="highlight">Airale,</span><br>
+        <span id="typed-text"></span><span class="cursor">|</span>
+      </h1>
+
+      <p> I’m a graphic designer who transforms ideas into compelling visual experiences.
+          From bold branding to refined digital layouts, I create designs that don’t just look good—they communicate, connect, and convert.
+           Every project I take on is crafted with purpose, creativity, and attention to detail.
+           Let's work together to create something amazing.</p>
+
+      <div class="hero-buttons">
+        <a href="#contact" class="btn btn-outline">Contact Me</a>
+        <a href="#experience" class="btn btn-filled">My Journey </a>
+      </div>
+    </div>
+
+    <div class="hero-image reveal-right">
+      <img src="img/aira.jpg.jpg" alt="Airale — Profile Photo" />
+    </div>
+  </section>
+
+  <!--- ABOUT SECTION --->
+
+  <section class="about" id="about">
+    <div class="about-image reveal-left">
+      <img src="img/le.pjpg.jpg" alt="About Airale" />
+    </div>
+
+    <div class="about-text reveal-right">
+      <h2>About <span>Me</span></h2>
+      <h4>Graphic Designer</h4>
+      <p>Hi, I’m a passionate graphic designer dedicated to turning concepts into impactful visuals.
+         I specialize in creating designs that balance creativity with strategy—because great design isn’t just about aesthetics, it’s about solving problems and telling stories.
+      With a strong eye for detail and a deep understanding of visual communication, 
+      I work on everything from brand identity and social media graphics to marketing materials and digital content.</p>
+
+       <p>My goal is simple to help individuals and businesses stand out through thoughtful, engaging design.
+       I believe in clean, effective, and meaningful visuals that leave a lasting impression.
+       Whether you’re building a brand from scratch or refreshing your look, I’m here to bring your vision to life.</p>
+
+      <div class="skills-block">
+        <h5><i class="fa-solid fa-bookmark"></i> Skills</h5>
+        <div class="skills-tags">
+          <span class="skill-tag"><i class="fa-brands fa-html5"></i> HTML</span>
+          <span class="skill-tag"><i class="fa-brands fa-css3-alt"></i> CSS</span>
+          <span class="skill-tag"><i class="fa-brands fa-js"></i> JavaScript</span>
+          <span class="skill-tag"><i class="fa-brands fa-react"></i> React</span>
+          <span class="skill-tag"><i class="fa-brands fa-figma"></i> Figma</span>
+          <span class="skill-tag"><i class="fa-brands fa-github"></i> GitHub</span>
+          <span class="skill-tag"><i class="fa-brands fa-git-alt"></i> Git</span>
+          <span class="skill-tag"><i class="fa-brands fa-bootstrap"></i> Bootstrap</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!---- MY JOURNEY (Education & Experience) --->
+
+  <section class="timeline-section" id="experience">
+    <h2 class="section-title reveal">My <span>Journey</span></h2>
+    <div class="journey-grid">
+
+      <!-- Education Column -->
+      <div class="journey-col reveal-left">
+        <h3 class="journey-col-title">Educational Attainment</h3>
+        <div class="journey-item">
+          <div class="journey-dot"></div>
+          <div class="journey-card">
+            <span class="journey-year">2010 – 2016</span>
+            <h4>Luyongbonbon Elementary School</h4>
+            <p>Completed primary education with academic excellence and active participation
+               in school activities.</p>
+          </div>
+        </div>
+        <div class="journey-item">
+          <div class="journey-dot"></div>
+          <div class="journey-card">
+            <span class="journey-year">2016 – 2020</span>
+            <h4>Bukidnon NationalHigh School</h4>
+            <p>General Academic Strand. Developed strong foundations in Math, Science,
+               and Computer subjects.</p>
+          </div>
+        </div>
+
+        <div class="journey-item">
+          <div class="journey-dot"></div>
+          <div class="journey-card">
+            <span class="journey-year">2020 – 2024</span>
+            <h4>College — BS Information Technology</h4>
+            <p>Bachelor of Science in Computer Science. Specialized in web development
+               and software engineering.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Experience Column -->
+
+      <div class="journey-col reveal-right">
+        <h3 class="journey-col-title">Experience</h3>
+        <div class="journey-item">
+          <div class="journey-dot"></div>
+          <div class="journey-card">
+            <span class="journey-year">2022 – 2023</span>
+            <h4>Internship —Fligno Software Philippines,Inc.</h4>
+            <p>Assisted in frontend development, translating wireframes into pixel-perfect
+               interfaces using HTML, CSS, and JavaScript.</p>
+          </div>
+        </div>
+
+        <div class="journey-item">
+          <div class="journey-dot"></div>
+          <div class="journey-card">
+            <span class="journey-year">2023 – 2024</span>
+            <h4>Web Developer — MDCGroup,Inc.</h4>
+            <p>Built and maintained responsive web apps, improving performance and user
+               experience across multiple platforms.</p>
+          </div>
+        </div>
+
+        <div class="journey-item">
+          <div class="journey-dot"></div>
+          <div class="journey-card">
+            <span class="journey-year">2024 – Present</span>
+            <h4>Frontend Developer — Freelance</h4>
+            <p>Designing and developing modern, responsive websites for various clients
+               with focus on clean UI and UX.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!--- SERVICES SECTION--->
+
+  <section class="services" id="services">
+    <h2 class="section-title reveal">Services</h2>
+    <div class="services-grid">
+      <div class="service-card raise reveal-scale">
+        <i class="fa-solid fa-palette service-icon"></i>
+        <h3>Graphic Design</h3>
+        <p>Creating visually stunning graphics, logos, and brand identities tailored to your needs.</p>
+        <a href="#contact" class="btn btn-outline small">Hire Me</a>
+      </div>
+
+
+      <div class="service-card lower reveal-scale">
+        <i class="fa-solid fa-code service-icon"></i>
+        <h3>Web Development</h3>
+        <p>Building fast, responsive, and fully functional websites from scratch using modern technologies.</p>
+        <a href="#contact" class="btn btn-outline small">Hire Me</a>
+      </div>
+
+
+      <div class="service-card raise reveal-scale">
+        <i class="fa-solid fa-laptop-code service-icon"></i>
+        <h3>Frontend Design</h3>
+        <p>Crafting clean, user-friendly interfaces with smooth animations and great user experience.</p>
+        <a href="#contact" class="btn btn-outline small">Hire Me</a>
+      </div>
+    </div>
+  </section>
+
+  <!--- PROJECTS SECTION --->
+
+  <section class="project" id="project">
+    <h2 class="section-title reveal">Latest <span>Projects</span></h2>
+    <div class="project-grid">
+      <div class="project-card reveal-scale">
+        <img src="img/code1.jpg" alt=""/>
+        <div class="project-overlay">
+          <h4>Animation Prototypes</h4>
+          <p>Creative motion design and interactive animations.</p>
+          <a href="#" class="btn btn-outline small">View Project</a>
+        </div>
+      </div>
+
+
+      <div class="project-card reveal-scale">
+        <img src="img/code2.jpg" alt=""/>
+        <div class="project-overlay">
+          <h4>Modern Website</h4>
+          <p>Clean and responsive web design for modern businesses.</p>
+          <a href="#" class="btn btn-outline small">View Project</a>
+        </div>
+      </div>
+
+
+      <div class="project-card reveal-scale">
+        <img src="img/app.jpg" alt=""/>
+        <div class="project-overlay">
+          <h4>Mobile App UI</h4>
+          <p>User-friendly mobile interface design and prototyping.</p>
+          <a href="#" class="btn btn-outline small">View Project</a>
+        </div>
+      </div>
+
+
+      <div class="project-card reveal-scale">
+        <img src="img/meeting.jpg.jpg" alt=""/>
+        <div class="project-overlay">
+          <h4>Business Workshop</h4>
+          <p>Landing page for a corporate event and workshop.</p>
+          <a href="#" class="btn btn-outline small">View Project</a>
+        </div>
+      </div>
+
+
+      <div class="project-card reveal-scale">
+        <img src="img/food website.jpg" alt=""/>
+        <div class="project-overlay">
+          <h4>Food Website</h4>
+          <p>Vibrant restaurant and food delivery website layout.</p>
+          <a href="#" class="btn btn-outline small">View Project</a>
+        </div>
+      </div>
+
+
+      <div class="project-card reveal-scale">
+        <img src="img/techical.jpg.jpg" alt=""/>
+        <div class="project-overlay">
+          <h4>Tech Annual Fair</h4>
+          <p>Event website for a technology expo and annual fair.</p>
+          <a href="#" class="btn btn-outline small">View Project</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!---ACHIEVEMENTS SECTION --->
+
+  <section class="achievements" id="achievements">
+    <h2 class="section-title reveal">My <span>Achievements</span></h2>
+
+    <div class="ach-tabs">
+      <button class="ach-tab active" onclick="switchTab('certificates', event)">🏅 Certificates</button>
+      <button class="ach-tab" onclick="switchTab('awards', event)">🏆 Awards</button>
+    </div>
+
+    <!-- Certificates Tab -->
+    <div class="ach-content active" id="tab-certificates">
+      <div class="ach-item reveal">
+        <div class="ach-dot"></div>
+        <div class="ach-card">
+          <span class="ach-year">2024</span>
+          <h4>Responsive Web Design Certification</h4>
+          <p class="ach-org"><i class="fa-solid fa-building-columns"></i> freeCodeCamp</p>
+          <p>Completed 300 hours of coursework covering HTML, CSS, and responsive design principles.</p>
+          <span class="ach-badge">Web Design</span>
+        </div>
+      </div>
+
+
+      <div class="ach-item reveal">
+        <div class="ach-dot"></div>
+        <div class="ach-card">
+          <span class="ach-year">2023</span>
+          <h4>JavaScript Algorithms & Data Structures</h4>
+          <p class="ach-org"><i class="fa-solid fa-building-columns"></i> freeCodeCamp</p>
+          <p>Earned certification after completing projects covering ES6, regex, debugging, and data structures.</p>
+          <span class="ach-badge">JavaScript</span>
+        </div>
+      </div>
+
+
+      <div class="ach-item reveal">
+        <div class="ach-dot"></div>
+        <div class="ach-card">
+          <span class="ach-year">2023</span>
+          <h4>Frontend Development Certificate</h4>
+          <p class="ach-org"><i class="fa-solid fa-building-columns"></i>Opol Community College</p>
+          <p>Recognized for outstanding performance in web development coursework during college.</p>
+          <span class="ach-badge">Frontend</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Awards Tab -->
+
+    <div class="ach-content" id="tab-awards">
+      <div class="ach-item reveal">
+        <div class="ach-dot"></div>
+        <div class="ach-card">
+          <span class="ach-year">2024</span>
+          <h4>Best Capstone Project Award</h4>
+          <p class="ach-org"><i class="fa-solid fa-trophy"></i>BNHS</p>
+          <p>Awarded 1st place for developing a full-stack web application during the capstone defense.</p>
+          <span class="ach-badge">🥇 1st Place</span>
+        </div>
+      </div>
+
+
+      <div class="ach-item reveal">
+        <div class="ach-dot"></div>
+        <div class="ach-card">
+          <span class="ach-year">2023</span>
+          <h4>Web Design Competition — 2nd Place</h4>
+          <p class="ach-org"><i class="fa-solid fa-trophy"></i> Regional ICT Competition</p>
+          <p>Placed 2nd in an inter-school web design competition, recognized for creative UI and clean code.</p>
+          <span class="ach-badge">🥈 2nd Place</span>
+        </div>
+      </div>
+
+
+      <div class="ach-item reveal">
+        <div class="ach-dot"></div>
+        <div class="ach-card">
+          <span class="ach-year">2022</span>
+          <h4>Academic Excellence Award</h4>
+          <p class="ach-org"><i class="fa-solid fa-star"></i>BNHS</p>
+          <p>Recognized for maintaining a high GPA and consistent academic performance throughout the semester.</p>
+          <span class="ach-badge">Academic</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--- CONTACT SECTION --->
+
+  <section class="contact" id="contact">
+    <div class="contact-left reveal-left">
+      <h2>Contact <span>Me</span></h2>
+      <p class="subtitle">Get in touch</p>
+      <h4><i class="fa-regular fa-comment-dots"></i> Talk to me</h4>
+      <div class="contact-info">
+        <p>
+
+          <strong>Email</strong>
+          <a href="mailto:ejaresaira@email.com">ejaresaira@email.com</a>
+        </p>
+
+        <p>
+          <strong>WhatsApp</strong>
+          <a href="https://www.whatsapp.com/">+63 9097884</a>
+        </p>
+
+        <p>
+          <strong>Messenger</strong>
+          <a href="https://www.messenger.com/">airaleey</a>
+        </p>
+      </div>
+    </div>
+
+
+    <div class="contact-right reveal-right">
+      <h4><i class="fa-regular fa-paper-plane"></i> Write me your project</h4>
+      <form onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="Write your name" required />
+        </div>
+
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Write your email" required />
+        </div>
+
+
+        <div class="form-group">
+          <label for="msg">Project</label>
+          <textarea id="msg" rows="4" placeholder="Write your project" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-filled">Send Message →</button>
+      </form>
+    </div>
+  </section>
+
+  <!--- FOOTER --->
+
+  <footer class="footer">
+    <h3>Airale</h3>
+    <p>Graphic Designer</p>
+    <ul class="footer-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#project">Projects</a></li>
+      <li><a href="#achievements">Achievements</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+
+    <div class="social-icons">
+      <a href="https://ph.linkedin.com/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="#" target="_blank"><i class="fa-brands fa-github"></i></a>
+      <a href="https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2F%3Fhl%3Den&is_from_rle" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+
+
+    <p class="copy">© <span id="year"></span> Airale. All rights reserved.</p>
+  </footer>
+
+  <!---- JAVASCRIPT --->
+
+  <script>
+    /* ---------- ACHIEVEMENTS TAB SWITCHER ---------- */
+
+    function switchTab(tab, event) {
+      document.querySelectorAll('.ach-tab').forEach(btn => btn.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      document.querySelectorAll('.ach-content').forEach(content => content.classList.remove('active'));
+      document.getElementById('tab-' + tab).classList.add('active');
+    }
+
+    /* ---------- HAMBURGER MENU ---------- */
+
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('open');
+      });
+    });
+
+    /* ---------- TYPING EFFECT ---------- */
+
+    const phrases = [
+      'Frontend Developer.',
+      'Graphic Designer.',
+      'Web Designer.',
+      'Marketing.',
+    ];
+
+    let phraseIndex = 0;
+    let charIndex   = 0;
+    let isDeleting  = false;
+    const typedEl   = document.getElementById('typed-text');
+
+    function type() {
+      const currentPhrase = phrases[phraseIndex];
+      typedEl.textContent = isDeleting
+        ? currentPhrase.substring(0, --charIndex)
+        : currentPhrase.substring(0, ++charIndex);
+
+      let delay = isDeleting ? 60 : 100;
+
+      if (!isDeleting && charIndex === currentPhrase.length) {
+        delay = 1800;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        delay = 400;
+      }
+
+      setTimeout(type, delay);
+    }
+
+    type();
+
+    /* ---------- SCROLL REVEAL ANIMATIONS ---------- */
+
+    const revealElements = document.querySelectorAll(
+      '.reveal, .reveal-left, .reveal-right, .reveal-scale'
+    );
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    /* ---------- CONTACT FORM ---------- */
+
+    function handleSubmit(event) {
+      event.preventDefault();
+      alert('Message sent! I will get back to you soon.');
+      event.target.reset();
+    }
+
+    /* ---------- FOOTER YEAR ---------- */
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
